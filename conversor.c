@@ -1,4 +1,7 @@
 #include <stdio.h>
+#include <string.h>
+
+
 double obterFatorConversao(char unidade[]) {
     if (strcmp(unidade, "metro") == 0) return 1.0;
     if (strcmp(unidade, "centimetro") == 0) return 100.0;
@@ -40,7 +43,7 @@ int main()
     double fatorOrigem = obterFatorConversao(unidadeOrigem);
     double fatorDestino = obterFatorConversao(unidadeDestino);
 
-        // Verificar se as unidades são válidas
+    // Verificar se as unidades são válidas
     if (fatorOrigem < 0 || fatorDestino < 0) {
         printf("Unidade desconhecida. Verifique as entradas e tente novamente.\n");
         return 1;
