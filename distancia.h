@@ -1,8 +1,8 @@
 #include <string.h> 
 
-double obterFatorConversao(char unidade[]);
+double obterFatorConversaoDistancia(char unidade[]);
 
-double obterFatorConversao(char unidade[]) {
+double obterFatorConversaoDistancia(char unidade[]) {
     if (strcmp(unidade, "metro") == 0) return 1.0;
     if (strcmp(unidade, "centimetro") == 0) return 100.0;
     if (strcmp(unidade, "quilometro") == 0) return 0.001;
