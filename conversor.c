@@ -2,6 +2,8 @@
 #include <string.h>
 #include "distancia.h"
 #include "bytes.h"
+#include "temperatura.h"
+#include "velocidade.h"
 
 
 int main()
@@ -14,10 +16,12 @@ int main()
    printf("1. distancia (metro, centimetro...)\n");
    printf("2. peso (gramas, kilogramas...)\n");
    printf("3. armazenamento (megabytes, gigabytes...)\n");
+   printf("4. temperatura (Celsius, Fahrenheit, Kelvin)\n");
+   printf("5. velocidade (km/h, m/s, mph)\n");
    scanf("%d", &unidade);
 
-   switch (unidade)
-   {
+   switch (unidade){
+
    case 1:
    
     printf("Digite o valor a ser convertido: ");
@@ -76,12 +80,51 @@ int main()
 
     break;
 
-   
-   default:
+    case 4:
 
-   printf("unidade fora do escopo que pode ser analisado\n");
-    break;
-   }
+        printf("Digite o valor a ser convertido: ");
+        scanf("%lf", &valor);
 
+        printf("Digite a unidade de origem (Celsius, Fahrenheit, Kelvin): ");
+        scanf("%s", unidadeOrigem);
+
+        printf("Digite a unidade de destino (Celsius, Fahrenheit, Kelvin): ");
+        scanf("%s", unidadeDestino);
+
+        double valorConvertidoTemp = converterTemperatura(valor, unidadeOrigem, unidadeDestino);
+
+        if (valorConvertidoTemp < 0) {
+            printf("Unidade desconhecida. Verifique as entradas e tente novamente.\n");
+            return 1;
+        }
+        printf("%.4lf %s equivalem a %.4lf %s\n", valor, unidadeOrigem, valorConvertidoTemp, unidadeDestino);
+        break;
+
+    case 5:
+        printf("Digite o valor a ser convertido: ");
+        scanf("%lf", &valor);
+
+        printf("Digite a unidade de origem (km/h, m/s, mph): ");
+        scanf("%s", unidadeOrigem);
+
+        printf("Digite a unidade de destino (km/h, m/s, mph): ");
+        scanf("%s", unidadeDestino);
+
+        double fatorVelocidadeOrigem = obterFatorVelocidade(unidadeOrigem);
+        double fatorVelocidadeDestino = obterFatorVelocidade(unidadeDestino);
+
+        if (fatorVelocidadeOrigem < 0 || fatorVelocidadeDestino < 0) {
+            printf("Unidade desconhecida. Verifique as entradas e tente novamente.\n");
+            return 1;
+        }
+
+        double valorConvertidoVel = (valor / fatorVelocidadeOrigem) * fatorVelocidadeDestino;
+
+        printf("%.4lf %s equivalem a %.4lf %s\n", valor, unidadeOrigem, valorConvertidoVel, unidadeDestino);
+        break;
+        
+    default:
+        printf("unidade fora do escopo que pode ser analisado\n");
+    }
     return 0;
 }
