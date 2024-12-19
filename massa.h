@@ -1,8 +1,10 @@
 #include <stdio.h>
 
-int main(int argc, char const *argv[])
+double obterFatorConversaoDistancia(char unidade[]);
+
+double obterFatorConversaoMassa(char unidade[])
 {
-    
+
     return 0;
 }
 
