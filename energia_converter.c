@@ -1,4 +1,4 @@
-#include <stdio.h> // Biblioteca padrão de entrada e saída, usada para printf e scanf
+#include <stdio.h> 
 
 // Função para converter de Watts para quilowatts
 float wattsParaQuilowatts(float watts) {
