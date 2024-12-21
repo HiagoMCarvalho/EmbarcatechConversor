@@ -51,6 +51,32 @@ int main()
 
     break;
 
+    case 2:
+
+    printf("Digite o valor a ser convertido: ");
+    scanf("%lf", &valor);
+
+    printf("Digite a unidade de origem (quilograma, grama, miligrama ou tonelada): ");
+    scanf("%s", unidadeOrigem);
+
+    printf("Digite a unidade de destino (quilograma, grama, miligrama ou tonelada): ");
+    scanf("%s", unidadeDestino);
+
+    //Conversão
+    double resultado = converterMassa(valor, unidadeOrigem, unidadeDestino);
+
+    if (resultado < 0) //Condição para validação das unidades
+    {
+        printf("Erro, unidade inválida!");
+    }
+    else
+    {
+        //Valor convertido
+        printf("%.2lf %s é igual a %.2lf %s\n", valor, unidadeOrigem, unidadeDestino);
+    }
+
+    break;
+
     case 3:
 
     printf("Digite o valor a ser convertido: ");
