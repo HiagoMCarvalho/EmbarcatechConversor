@@ -1,17 +1,20 @@
 #include <string.h>
 
-double obterFatorConversaoDistancia(double valor, char unidade[]);
+double obterFatorConversaoMassa(char unidade[]);
 
 double obterFatorConversaoMassa(char unidade[])
 {
-if (strcmp(unidade, "quilograma") == 0) return 1.0;
+    if (strcmp(unidade, "quilograma") == 0)
+        return 1.0;
 
-if(strcmp(unidade, "grama") == 0) return 1000;
+    if (strcmp(unidade, "grama") == 0)
+        return 1000.0;
 
-if (strcmp(unidade, "miligrama")) return 1000000;
+    if (strcmp(unidade, "miligrama") == 0)
+        return 1000000.0;
 
-if (strcmp(unidade, "tonelada")) return /*valor*/ 1000000;
+    if (strcmp(unidade, "tonelada") == 0)
+        return 0.000001;
 
     return 0;
 }
-
