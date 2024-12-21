@@ -68,18 +68,18 @@ int main()
     double fatorDestinoMassa = obterFatorConversaoMassa(unidadeDestino);
 
 
-    if (fatorOrigemMassa < 0 || fatorDestinoMassa < 0) //Condicional para verificar as unidades
+    if (fatorOrigemMassa <= 0 || fatorDestinoMassa <= 0) //Condicional para verificar as unidades
     {
         printf("Erro, unidade inválida!");
         return 1;       
     }
 
         //Declarar valor para conversão
-        double valorQuilograma = valor * fatorOrigemMassa;
-        double valorConvertidoMassa = valorQuilograma / fatorDestinoMassa;
+        
+        double valorConvertidoMassa = valor * (fatorOrigemMassa / fatorDestinoMassa);
 
         //Valor convertido
-        printf("%1.lf %s é igual a %1.lf %s\n", valor, fatorOrigemMassa, valorConvertidoMassa, fatorDestinoMassa);
+        printf("%.2lf %s é igual a %.3lf %s \n", valor, unidadeOrigem, valorConvertidoMassa, unidadeDestino);
     
     break;
 
