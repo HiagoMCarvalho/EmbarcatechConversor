@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "distancia.h"
+#include "massa.h"
 #include "bytes.h"
 #include "temperatura.h"
 #include "velocidade.h"
@@ -17,7 +18,7 @@ int main()
    printf("2. peso (gramas, kilogramas...)\n");
    printf("3. armazenamento (megabytes, gigabytes...)\n");
    printf("4. temperatura (Celsius, Fahrenheit, Kelvin)\n");
-   printf("5. velocidade (km/h, m/s, mph)\n");
+   printf("5. velocidade (km/h, m/s, mph)\n\n");
    scanf("%d", &unidade);
 
    switch (unidade){
@@ -63,18 +64,23 @@ int main()
     scanf("%s", unidadeDestino);
 
     //Conversão
-    double resultado = converterMassa(valor, unidadeOrigem, unidadeDestino);
+    double fatorOrigemMassa = obterFatorConversaoMassa(unidadeOrigem);
+    double fatorDestinoMassa = obterFatorConversaoMassa(unidadeDestino);
 
-    if (resultado < 0) //Condição para validação das unidades
+
+    if (fatorOrigemMassa < 0 || fatorDestinoMassa < 0) //Condicional para verificar as unidades
     {
         printf("Erro, unidade inválida!");
-    }
-    else
-    {
-        //Valor convertido
-        printf("%.2lf %s é igual a %.2lf %s\n", valor, unidadeOrigem, unidadeDestino);
+        return 1;       
     }
 
+        //Declarar valor para conversão
+        double valorQuilograma = valor * fatorOrigemMassa;
+        double valorConvertidoMassa = valorQuilograma / fatorDestinoMassa;
+
+        //Valor convertido
+        printf("%1.lf %s é igual a %1.lf %s\n", valor, fatorOrigemMassa, valorConvertidoMassa, fatorDestinoMassa);
+    
     break;
 
     case 3:
