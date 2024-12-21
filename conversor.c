@@ -79,7 +79,7 @@ int main()
         double valorConvertidoMassa = valor * (fatorOrigemMassa / fatorDestinoMassa);
 
         //Valor convertido
-        printf("%.2lf %s é igual a %.3lf %s \n", valor, unidadeOrigem, valorConvertidoMassa, unidadeDestino);
+        printf("%.2lf %s é igual a %lf %s \n", valor, unidadeOrigem, valorConvertidoMassa, unidadeDestino);
     
     break;
 
