@@ -1,25 +1,34 @@
 #include <stdio.h>
 #include <string.h>
-#include "distancia.h"
-#include "massa.h"
-#include "bytes.h"
-#include "temperatura.h"
-#include "velocidade.h"
+#include "./include/distancia.h"
+#include "./include/massa.h"
+#include "./include/bytes.h"
+#include "./include/temperatura.h"
+#include "./include/velocidade.h"
+#include "conversor_area.h"
+#include "conversor_tempo.h"
 
+
+void interface_tempo(float valor);
+void interface_area(float valor);
 
 int main()
 {
-   int unidade;
-   double valor;
-   char unidadeOrigem[20], unidadeDestino[20];
+    int unidade;
+    double valor;
+    char unidadeOrigem[20], unidadeDestino[20];
 
-   printf("Digite o numero relacionado a unidade que deseja converter: \n");
-   printf("1. distancia (metro, centimetro...)\n");
-   printf("2. peso (gramas, kilogramas...)\n");
-   printf("3. armazenamento (megabytes, gigabytes...)\n");
-   printf("4. temperatura (Celsius, Fahrenheit, Kelvin)\n");
-   printf("5. velocidade (km/h, m/s, mph)\n\n");
-   scanf("%d", &unidade);
+    printf("Digite o numero relacionado a unidade que deseja converter: \n");
+    printf("[1] - DISTANCIA\n");
+    printf("[2] - PESO\n");
+    printf("[3] - DADOS\n");
+    printf("[4] - TEMPERATURA\n");
+    printf("[5] - VELOCIDADE\n");
+    printf("[6] - TEMPO\n");
+    printf("[7] - AREA\n");
+
+    printf("OPCAO: ");
+    scanf("%d", &unidade);
 
    switch (unidade){
 
@@ -154,9 +163,99 @@ int main()
 
         printf("%.4lf %s equivalem a %.4lf %s\n", valor, unidadeOrigem, valorConvertidoVel, unidadeDestino);
         break;
-        
+    
+    case 6: {
+        float valor = 0.0;
+        printf("Digite o valor a ser Convertido: ");
+        scanf("%f", &valor);
+        interface_tempo(valor);
+        break;
+    }
+
+    case 7: {
+        float valor = 0.0;
+        printf("Digite o valor a ser Convertido: ");
+        scanf("%f", &valor);
+        interface_area(valor);
+        break;
+    }
+
     default:
         printf("unidade fora do escopo que pode ser analisado\n");
     }
+
     return 0;
+}
+
+
+void interface_tempo(float valor) {
+    if(valor < 0) {
+        printf("Valor de Tempo Invalido\n");
+    } else {
+        int unidadeInicial = 0, unidadeFinal = 0;
+
+        printf("Qual a Unidade Inicial?\n");
+        printf("[1]-Segundos [2]-Minutos [3]-Horas\n");
+        printf("OPCAO: ");
+        scanf("%d", &unidadeInicial);
+
+        printf("Qual a Unidade Final?\n");
+        printf("[1]-Segundos [2]-Minutos [3]-Horas\n");
+        printf("OPCAO: ");
+        scanf("%d", &unidadeFinal);
+        
+        if (
+            unidadeInicial < 1 || 
+            unidadeInicial > 3 ||
+            unidadeFinal < 1 ||
+            unidadeFinal > 3 ||
+            unidadeFinal == unidadeInicial
+        ) { printf("Unidade Invalida\n"); }
+        else {
+            if(unidadeInicial == 1 && unidadeFinal == 2) {valor = converter_segundos_para_minutos(valor);}
+            if(unidadeInicial == 1 && unidadeFinal == 3) {valor = converter_segundos_para_horas(valor);}
+            if(unidadeInicial == 2 && unidadeFinal == 1) {valor = converter_minutos_para_segundos(valor);}
+            if(unidadeInicial == 2 && unidadeFinal == 3) {valor = converter_minutos_para_horas(valor);}
+            if(unidadeInicial == 3 && unidadeFinal == 1) {valor = converter_horas_para_segundos(valor);}
+            if(unidadeInicial == 3 && unidadeFinal == 2) {valor = converter_horas_para_minutos(valor);}
+
+            printf("Valor Convertido: %.2f\n", valor);
+        }
+    }
+}
+
+void interface_area(float valor) {
+    if(valor < 0) {
+        printf("Valor de Area Invalido\n");
+    } else {
+        int unidadeInicial = 0, unidadeFinal = 0;
+
+        printf("Qual a Unidade Inicial?\n");
+        printf("[1]-CentimetrosQuad. [2]-MetrosQuad. [3]-QuilometrosQuad.\n");
+        printf("OPCAO: ");
+        scanf("%d", &unidadeInicial);
+
+        printf("Qual a Unidade Final?\n");
+        printf("[1]-CentimetrosQuad. [2]-MetrosQuad. [3]-QuilometrosQuad.\n");
+        printf("OPCAO: ");
+        scanf("%d", &unidadeFinal);
+        
+        if (
+            unidadeInicial < 1 || 
+            unidadeInicial > 3 ||
+            unidadeFinal < 1 ||
+            unidadeFinal > 3 ||
+            unidadeFinal == unidadeInicial
+        ) { printf("Unidade Invalida\n"); }
+        else {
+            if(unidadeInicial == 1 && unidadeFinal == 2) {valor = converter_centimetrosQ_para_metrosQ(valor);}
+            if(unidadeInicial == 1 && unidadeFinal == 3) {valor = converter_centimetrosQ_para_quilometrosQ(valor);}
+            if(unidadeInicial == 2 && unidadeFinal == 1) {valor = converter_metrosQ_para_centimetrosQ(valor);}
+            if(unidadeInicial == 2 && unidadeFinal == 3) {valor = converter_metrosQ_para_quilometrosQ(valor);}
+            if(unidadeInicial == 3 && unidadeFinal == 1) {valor = converter_quilometrosQ_para_centimetrosQ(valor);}
+            if(unidadeInicial == 3 && unidadeFinal == 2) {valor = converter_quilometrosQ_para_metrosQ(valor);}
+
+            printf("Valor Convertido: %.2f\n", valor);
+        }
+    }
 }
