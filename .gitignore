@@ -1,1 +1,4 @@
-conversor.exe
+/bin/
+/obj/
+/build/
+/.vscode/
