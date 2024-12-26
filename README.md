@@ -9,27 +9,51 @@ O **EmbarcatechConversor** é um software projetado para realizar conversões de
 - Conversões de velocidade (m/s, km/h, mph).
 - Conversões de energia (joules, calorias, kilowatts-hora).
 - Manipulação de bytes para análises de sistemas.
+- Conversão de Tempo (Segundos, Minutos e Horas).
+- Conversão de Área (Centimetros², Metros² e Quilometros²).
 
 ## Estrutura do Projeto
-- `conversor.c`: Arquivo principal que implementa a lógica do programa.
-- `bytes.h`: Header para manipulação de bytes.
-- `distancia.h`: Header para conversões de distância.
-- `energia_converter.h`: Header para conversões de energia.
-- `temperatura.h`: Header para conversões de temperatura.
-- `velocidade.h`: Header para conversões de velocidade.
-- `.vscode/settings.json`: Configurações do editor de texto Visual Studio Code.
-- `.vscode/tasks.json`: Tarefas configuradas para compilação no Visual Studio Code.
+- `app`: Pasta principal que contém os seguintes arquivos:
+   - `include`: Pasta com os cabeçalhos das conversões (arquivos .h).
+   - `src`: Pasta com os arquivos de conversão (arquivos .c).
+   - `main.c`: Arquivo principal do projeto, onde as funções são importadas e utilizadas.
+- `test`: Pasta reservada para testes, onde contém os seguintes arquivos:
+   - `include`: Pasta com os cabeçalhos dos testes (arquivos .h).
+   - `src`: Pasta com os arquivos de testes (arquivos .c).
+   - `unity`: Pasta reservada para o framework de testes unitários 'Unity'.
+   - `test_runner.c`: Arquivo principal para a realização da cadeia de testes unitários.
+- `Makefile`: Arquivo configurado para compilar e executar os binários em ambiente Windows.
 
 ## Como Usar
-1. **Compilar o projeto:**
-   Utilize um compilador C (como `gcc`) para compilar o arquivo principal:
-   ```bash
-   gcc -o conversor conversor.c
+**Primeiro Passo:**
+Verifique se em seu ambiente constam o *Compilador gcc* e a ferramenta de automação de construção *Make*.
+   ``` bash
+   gcc --version
    ```
-2. **Executar o programa:**
-   No terminal, rode o executável gerado:
-   ```bash
-   ./conversor
+   ``` bash
+   make --version
+   ```
+**Segundo Passo:**
+Estando na pasta raiz do projeto, execute os comandos *make* com base em sua necessidade:
+- Compilar e executar o programa:
+   ``` bash
+   make run_main
+   ```
+- Compilar e executar os testes unitários:
+   ``` bash
+   make run_test
+   ```
+- Apenas compilar o programa:
+   ``` bash
+   make build_main
+   ```
+- Apenas compilar os testes unitários:
+   ``` bash
+   make build_tests
+   ```
+- Limpar os arquivos temporários (.exe e .o):
+   ``` bash
+   make clean
    ```
 
 ## Exemplos de Uso

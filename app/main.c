@@ -5,8 +5,8 @@
 #include "./include/bytes.h"
 #include "./include/temperatura.h"
 #include "./include/velocidade.h"
-#include "conversor_area.h"
-#include "conversor_tempo.h"
+#include "./include/conversor_area.h"
+#include "./include/conversor_tempo.h"
 
 
 void interface_tempo(float valor);
