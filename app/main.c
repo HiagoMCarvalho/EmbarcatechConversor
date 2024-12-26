@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <string.h>
 #include "./include/distancia.h"
@@ -5,8 +6,10 @@
 #include "./include/bytes.h"
 #include "./include/temperatura.h"
 #include "./include/velocidade.h"
-#include "conversor_area.h"
-#include "conversor_tempo.h"
+#include "./include/conversor_area.h"
+#include "./include/conversor_tempo.h"
+#include "./include/frequencia.h" 
+
 
 
 void interface_tempo(float valor);
@@ -18,6 +21,7 @@ int main()
     double valor;
     char unidadeOrigem[20], unidadeDestino[20];
 
+    //Seleção da conversao
     printf("Digite o numero relacionado a unidade que deseja converter: \n");
     printf("[1] - DISTANCIA\n");
     printf("[2] - PESO\n");
@@ -26,21 +30,23 @@ int main()
     printf("[5] - VELOCIDADE\n");
     printf("[6] - TEMPO\n");
     printf("[7] - AREA\n");
+    printf("[8] - FREQUENCIA\n");
+  
 
     printf("OPCAO: ");
     scanf("%d", &unidade);
 
    switch (unidade){
 
-   case 1:
+    case 1:
    
     printf("Digite o valor a ser convertido: ");
     scanf("%lf", &valor);
 
-    printf("Digite a unidade de origem (metro, centimetro, quilometro, etc.): ");
+    printf("Digite a unidade de origem (metro, centimetro, quilometro,milimetro, milha, jarda, pe): ");
     scanf("%s", unidadeOrigem);
 
-    printf("Digite a unidade de destino (metro, centimetro, quilometro, etc.): ");
+    printf("Digite a unidade de destino (metro, centimetro, quilometro,milimetro, milha, jarda, pe): ");
     scanf("%s", unidadeDestino);
 
     double fatorOrigem = obterFatorConversaoDistancia(unidadeOrigem);
@@ -85,10 +91,10 @@ int main()
 
         //Declarar valor para conversão
         
-        double valorConvertidoMassa = valor * (fatorOrigemMassa / fatorDestinoMassa);
+        double valorConvertidoMassa = valor * (fatorDestinoMassa / fatorOrigemMassa);
 
         //Valor convertido
-        printf("%.2lf %s é igual a %lf %s \n", valor, unidadeOrigem, valorConvertidoMassa, unidadeDestino);
+        printf("%.2lf %s eh igual a %lf %s \n", valor, unidadeOrigem, valorConvertidoMassa, unidadeDestino);
     
     break;
 
@@ -97,10 +103,10 @@ int main()
     printf("Digite o valor a ser convertido: ");
     scanf("%lf", &valor);
 
-    printf("Digite a unidade de origem ((megabytes, gigabytes...): ");
+    printf("Digite a unidade de origem (megabyte, gigabyte, terabyte, kilobyte, byte, bit): ");
     scanf("%s", unidadeOrigem);
 
-    printf("Digite a unidade de destino ((megabytes, gigabytes...): ");
+    printf("Digite a unidade de destino (megabyte, gigabyte, terabyte, kilobyte, byte, bit): ");
     scanf("%s", unidadeDestino);
 
     double fatorOrigembytes = obterFatorConversaoByte(unidadeOrigem);
@@ -180,11 +186,107 @@ int main()
         break;
     }
 
+    case 8: {
+    
+    int uniOrig =0, uniDest =0;
+     
+    printf("Programa Conversor de Frequencia\n");
+    printf("Escolha a unidade de origem:\n");
+    printf("1  Hz\n");
+    printf("2  Khz\n");
+    printf("3  Mhz\n");
+    printf("4. GHz\n"); 
+    printf("5. THz\n");
+    printf("Digite a opcao: ");
+    scanf("%d", &uniOrig);
+
+    printf("Escolha a unidade de destino:\n");
+    printf("1. Hz\n"); 
+    printf("2. kHz\n"); 
+    printf("3. MHz\n"); 
+    printf("4. GHz\n"); 
+    printf("5. THz\n");
+    printf("Digite a opcao: ");
+    scanf("%d", &uniDest);
+
+    printf("Digite o valor a ser convertido: ");
+    scanf("%lf", &valor);
+
+    switch(uniOrig) {
+        case 1: // Hz
+            if (uniDest == 2) {
+                printf("%.2lf Hz e igual a %.2lf kHz\n", valor, HzToKHz(valor));
+            } else if (uniDest == 3) {
+                printf("%.2lf Hz e igual a %.2lf MHz\n", valor, HzToMHz(valor));
+            } else {
+                printf("Unidade de destino invalida!\n");
+            }
+            break;
+        case 2: // kHz
+            if (uniDest == 1) {
+                printf("%.2lf kHz e igual a %.2lf Hz\n", valor, KHzToHz(valor));
+            } else if (uniDest == 3) {
+                printf("%.2lf kHz e igual a %.2lf MHz\n", valor, KHzToMHz(valor));
+            } else {
+                printf("Unidade de destino invalida!\n");
+            }
+            break;
+        case 3: // MHz
+            if (uniDest == 1) {
+                printf("%.2lf MHz e igual a %.2lf Hz\n", valor, MHzToHz(valor));
+            } else if (uniDest == 2) {
+                printf("%.2lf MHz e igual a %.2lf kHz\n", valor, MHzToKHz(valor));
+            } else {
+                printf("Unidade de destino invalida!\n");
+            }
+            break;
+             case 4: // GHz 
+             if (uniDest == 1) {
+                printf("%.2lf GHz e igual a %.2lf Hz\n", valor, 
+                GHzToHz(valor)); 
+             } else if (uniDest == 2) { 
+                printf("%.2lf GHz e igual a %.2lf kHz\n", valor, 
+                GHzToKHz(valor)); 
+             } else if (uniDest == 3) { 
+               printf("%.2lf GHz e igual a %.2lf MHz\n", valor, 
+               GHzToMHz(valor)); 
+             } else if (uniDest == 5) {
+               printf("%.2lf GHz e igual a %.2lf THz\n", valor, 
+               GHzToTHz(valor)); 
+             } else { printf("Unidade de destino invalida!\n"); } 
+             break;
+
+             case 5: // THz 
+             if (uniDest == 1) { 
+                printf("%.2lf THz e igual a %.2lf Hz\n", valor, 
+                THzToHz(valor)); 
+             } else if (uniDest == 2) { 
+                printf("%.2lf THz e igual a %.2lf kHz\n", valor, 
+                THzToKHz(valor)); 
+             } else if (uniDest == 3) { 
+                printf("%.2lf THz e igual a %.2lf MHz\n", valor, 
+                THzToMHz(valor));
+             } else if (uniDest == 4) { 
+                printf("%.2lf THz e igual a %.2lf GHz\n", valor, 
+                THzToGHz(valor));
+             } else { printf("Unidade de destino invalida!\n"); } 
+             break;
+        
+        default:
+            printf("Unidade de origem invalida!\n");
+    }
+
+  
+
+        
+    break;
+    }
+    
     default:
         printf("unidade fora do escopo que pode ser analisado\n");
     }
+return 0;
 
-    return 0;
 }
 
 
@@ -258,4 +360,7 @@ void interface_area(float valor) {
             printf("Valor Convertido: %.2f\n", valor);
         }
     }
+
+
+
 }
