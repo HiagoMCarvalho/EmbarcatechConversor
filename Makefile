@@ -1,6 +1,6 @@
 # Variáveis gerais
 CC = gcc
-CFLAGS = -Wall -Wextra -Iapp/include -Itest/include -Itest/unity -DUNITY_INCLUDE_DOUBLE
+CFLAGS = -Wall -Wextra -Iapp/include -Itest/include -Itest/unity -DUNITY_INCLUDE_DOUBLE -g
 BUILD_DIR = build
 BIN_DIR = $(BUILD_DIR)\bin
 OBJ_DIR = $(BUILD_DIR)\obj
