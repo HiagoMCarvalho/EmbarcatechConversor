@@ -8,7 +8,9 @@
 #include "./include/velocidade.h"
 #include "./include/conversor_area.h"
 #include "./include/conversor_tempo.h"
+#include "./include/conversor_volume.h"
 #include "./include/frequencia.h" 
+
 
 
 
@@ -31,6 +33,7 @@ int main()
     printf("[6] - TEMPO\n");
     printf("[7] - AREA\n");
     printf("[8] - FREQUENCIA\n");
+    printf("[9] - VOLUME\n");
   
 
     printf("OPCAO: ");
@@ -283,14 +286,6 @@ int main()
     }
 
 case 9: {
-
-int Litros_para_ml(int litros){
-    return litros * 1000;
-}
-double Litros_para_mcubico(int litros){
-    return litros / 1000.0;
-}
-
     char unidade[20];
     int litros;
 
